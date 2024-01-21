@@ -1,0 +1,43 @@
+{
+  "Routes": [
+    //Authentication Controller
+    {
+      "UpstreamPathTemplate": "/allBooks",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "book_ms",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/allBooks"
+    },
+    {
+      "UpstreamPathTemplate": "/book/book/{bookId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "book_ms",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/book/book/{bookId}"
+    },
+    {
+      "UpstreamPathTemplate": "/book/book/auhtor/{authorId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msusers",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/User"
+    },
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:80"
+  }
+}

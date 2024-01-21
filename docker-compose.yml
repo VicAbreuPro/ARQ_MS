@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  book_ms:
+    build:
+        context: ./Book_MS
+        dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - arq_db
+  
+  reviewsys_ms:
+    build:
+        context: ./ReviewSystem
+        dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    depends_on:
+      - arq_db
+
+  user_ms:
+    build:
+        context: ./Users
+        dockerfile: Dockerfile
+    ports:
+        - "8082:80"
+    depends_on:
+        - arq_db
+
+  arq_db:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      SA_PASSWORD: "adminDev123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_volume:/var/opt/mssql # Mount volume for SQL Server data persistence
+
+volumes:
+  sql_volume:
